@@ -7,6 +7,8 @@ public class Broken {
 
     public static final String NEW_VALUE = "";
 
+    String name;
+
     void echo() {
     }
 
@@ -19,8 +21,6 @@ public class Broken {
     void method(int a, int b, int c, int d, int e, int f, int g) {
 
         }
-
-        String name;
 
         Broken() {
         }
