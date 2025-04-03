@@ -7,9 +7,6 @@ public class Error {
     private String message;
 
     public Error() {
-        this.active = false;
-        this.status = 0;
-        this.message = "No message";
     }
 
     public Error(boolean active, int status, String message) {
