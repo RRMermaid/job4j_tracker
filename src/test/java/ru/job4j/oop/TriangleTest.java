@@ -40,13 +40,13 @@ public class TriangleTest {
     }
 
     @Test
-    public void when01and52and15Then95() {
+    public void when01and01and01ThenMinus1() {
         Point a = new Point(0, 1);
-        Point b = new Point(5, 2);
-        Point c = new Point(1, 5);
+        Point b = new Point(0, 1);
+        Point c = new Point(0, 1);
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
-        double expected = 9.5;
+        double expected = -1.0;
         assertThat(result).isCloseTo(expected, offset(0.001));
     }
 }
