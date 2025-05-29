@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class License {
-
     private String owner;
 
     private String model;
@@ -47,15 +46,13 @@ public class License {
 
     @Override
     public boolean equals(Object o) {
-        if (o != null && getClass() == o.getClass()) {
-            final License license = (License) o;
-            return Objects.equals(owner, license.owner)
-                    && Objects.equals(model, license.model)
-                    && Objects.equals(code, license.code)
-                    && Objects.equals(created, license.created);
-        } else {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        final License license = (License) o;
+        return Objects.equals(owner, license.owner)
+                && Objects.equals(model, license.model) && Objects.equals(code, license.code)
+                && Objects.equals(created, license.created);
     }
 
     @Override
