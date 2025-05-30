@@ -58,4 +58,9 @@ public class License {
                 && Objects.equals(code, license.code)
                 && Objects.equals(created, license.created);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, model, code, created);
+    }
 }
