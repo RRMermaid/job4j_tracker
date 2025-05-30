@@ -37,13 +37,9 @@ public class Tracker {
     }
 
     public boolean replace(int id, Item item) {
-        if (item == null || item.getName() == null || item.getName().isBlank()) {
-            return false;
-        }
-
         final int index = indexOf(id);
         if (index != -1) {
-            item.setId(id);
+            item.setId(id); // ✅ сохраняем старый id
             items[index] = item;
             return true;
         }
