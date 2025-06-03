@@ -15,25 +15,23 @@ public class Matches {
 
             final int matches = Integer.parseInt(input.nextLine());
 
-            // Валидация ввода по блок-схеме
-            if (matches < 1 || matches > 3) {
-                System.out.println("Ошибка: введите число от 1 до 3.");
-                continue; // не передаём ход
+            if (matches >= 1 && matches <= 3 && matches <= count) {
+                count -= matches;
+
+                if (count == 0) {
+                    System.out.println("Выиграл " + player);
+                } else {
+                    turn = !turn;
+                }
+
+            } else {
+                if (matches < 1 || matches > 3) {
+                    System.out.println("Ошибка: введите число от 1 до 3.");
+                } else if (matches > count) {
+                    System.out.println("Ошибка: нельзя взять больше, чем осталось ("
+                            + count + ").");
+                }
             }
-
-            if (matches > count) {
-                System.out.println("Ошибка: нельзя взять больше, чем осталось (" + count + ").");
-                continue; // не передаём ход
-            }
-
-            count -= matches;
-
-            if (count == 0) {
-                System.out.println("Выиграл " + player);
-                break;
-            }
-
-            turn = !turn; // передаём ход
         }
     }
 }
