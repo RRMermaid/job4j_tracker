@@ -41,4 +41,111 @@ class StartUITest {
         assertThat(tracker.findById(item.getId())).isNull();
         assertThat(output.toString()).contains("Заявка удалена успешно.");
     }
+
+    @Test
+    void whenReplaceItemTestOutputIsSuccessfully() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        String replaceName = "New Test Name";
+        Input input = new MockInput(
+                new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new ReplaceAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Изменить заявку" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Редактирование заявки ===" + ln
+                        + "Заявка изменена успешно." + ln
+                        + "Меню:" + ln
+                        + "0. Изменить заявку" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
+
+    @Test
+    void whenFindAllAction() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("First item"));
+        Item item2 = tracker.add(new Item("Second item"));
+        Input input = new MockInput(new String[] {"0", "1"});
+        UserAction[] actions = {
+                new FindAllAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Показать все заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Список всех заявок ===" + ln
+                        + item1 + ln
+                        + item2 + ln
+                        + "Меню:" + ln
+                        + "0. Показать все заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
+
+    @Test
+    void whenFindByNameAction() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Fix bug"));
+        Input input = new MockInput(new String[] {"0", "Fix bug", "1"});
+        UserAction[] actions = {
+                new FindByNameAction(output),
+                new ExitAction(output)
+        };
+
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Найти заявки по имени" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Поиск заявок по имени ===" + ln
+                        + item + ln
+                        + "Меню:" + ln
+                        + "0. Найти заявки по имени" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
+
+    @Test
+    void whenFindByIdActionFound() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Fix bug"));
+        Input input = new MockInput(new String[] {"0", String.valueOf(item.getId()), "1"});
+        UserAction[] actions = {
+                new FindByIdAction(output),
+                new ExitAction(output)
+        };
+
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Найти заявку по id" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Поиск заявки по id ===" + ln
+                        + item + ln
+                        + "Меню:" + ln
+                        + "0. Найти заявку по id" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
 }
