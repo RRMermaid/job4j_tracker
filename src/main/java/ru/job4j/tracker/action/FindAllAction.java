@@ -1,9 +1,10 @@
 package ru.job4j.tracker.action;
 
-import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.output.Output;
+
 
 public class FindAllAction implements UserAction {
     private final Output output;
@@ -17,11 +18,17 @@ public class FindAllAction implements UserAction {
         return "Показать все заявки";
     }
 
+    @SuppressWarnings("checkstyle:FinalLocalVariable")
     @Override
     public boolean execute(Input input, Tracker tracker) {
         output.println("=== Список всех заявок ===");
-        for (Item item : tracker.findAll()) {
-            output.println(item);
+        Item[] items = tracker.findAll();
+        if (items.length > 0) {
+            for (Item item : items) {
+                output.println(item);
+            }
+        } else {
+            output.println("Хранилище еще не содержит заявок");
         }
         return true;
     }
